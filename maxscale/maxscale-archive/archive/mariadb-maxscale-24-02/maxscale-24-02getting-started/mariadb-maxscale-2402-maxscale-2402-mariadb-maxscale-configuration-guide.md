@@ -670,7 +670,7 @@ defined in the root configuration file which by default is `/etc/maxscale.cnf`.
 
 This parameter specifies whether a core file should be generated if MaxScale\
 crashes. The default is `true` although usually a core file is not needed,\
-as MaxScale is capable of logging the full strack trace of all threads\
+as MaxScale is capable of logging the full stack trace of all threads\
 when it crashes.
 
 #### `auto_tune`
@@ -1621,7 +1621,7 @@ the MaxScale log.
 
 High water mark for network write buffer. When the size of the outbound network\
 buffer in MaxScale for a single connection exceeds this value, network traffic\
-throtting for that connection is started. The parameter accepts [size type\
+throttling for that connection is started. The parameter accepts [size type\
 values](mariadb-maxscale-2402-maxscale-2402-mariadb-maxscale-configuration-guide.md#sizes). The default value was 16777216 bytes before 22.08.4.
 
 More specifically, if the client side write queue is above this value, it will\
@@ -2865,10 +2865,10 @@ a lot of `PREPARE stmt FROM <sql>` commands, it is recommended that the value of
 
 In older versions of MaxScale, binary protocol prepared statements were limited\
 by `max_sescmd_history` and were also pruned by `prune_sescmd_history` but this\
-caused problems when the binary protocol prepared statment were pruned while\
+caused problems when the binary protocol prepared statement were pruned while\
 they were still open from the client's point of view. In older versions, the\
 recommended value of `max_sescmd_history` is the number of state modifying\
-commands plus the maximum number of open prepared statments that any application\
+commands plus the maximum number of open prepared statements that any application\
 may use.
 
 This parameter was moved into the MaxScale core in MaxScale 6.0. The parameter\
@@ -3170,12 +3170,12 @@ settings should be tuned according to the use case.
 _persistpoolmax_ limits how many connections can be kept in a pool for a given\
 server. If the pool is full, no more connections are detached from sessions even\
 if they are idle and required. The pool size should be large enough to contain\
-any connections being transferred between sessions, but not be greater tha&#x6E;_&#x6D;ax\_routing\_connections_. Using the value of _max\_routing\_connections_ is a\
+any connections being transferred between sessions, but not be greater than _max\_routing\_connections_. Using the value of _max\_routing\_connections_ is a\
 reasonable starting point.
 
 _persistmaxtime_ limits the time a connection may stay in the pool. This should\
 be high enough so that pooled connections are not unnecessarily closed. Cleaning\
-up clearly unneeded connections from the pool may be useful whe&#x6E;_&#x6D;ax\_routing\_connections_ is restrictively tuned. Because each MaxScale routing\
+up clearly unneeded connections from the pool may be useful when _max\_routing\_connections_ is restrictively tuned. Because each MaxScale routing\
 thread has its own connection pool, one thread can monopolize access to a\
 server. For example, if the pool of thread 1 has 100 connections to _ServerA_\
 with `max_routing_connections=100`, other threads can no longer connect to the\
@@ -3193,7 +3193,7 @@ pruning means that old session commands will not be replayed when a pooled\
 connection is reused. If the pruned commands are important\
 (e.g. statement preparations), the session may fail later on.
 
-If the number of clients actively running queries is greater tha&#x6E;_&#x6D;ax\_routing\_connections_, query throughput will suffer as clients will need to\
+If the number of clients actively running queries is greater than _max\_routing\_connections_, query throughput will suffer as clients will need to\
 take turns. In this situation, it's imperative to minimize the number of\
 backend connections a single session uses. The settings to achieve this depend\
 on the router. For ReadWriteSplit the following should be used:
@@ -4933,7 +4933,7 @@ $ bin/maxctrl show threads
 ```
 
 that is, the number of threads was 4 but has been reduced to 2, and while\
-thread 2 has become drained it stays as _Dormant_ since thread 3 is stil&#x6C;_&#x44;raining_, it is possible to make thread 2 _Active_ again by increasing the\
+thread 2 has become drained it stays as _Dormant_ since thread 3 is still _Draining_, it is possible to make thread 2 _Active_ again by increasing the\
 number of threads to 3.
 
 ```
